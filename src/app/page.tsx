@@ -13,8 +13,6 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 
-/* ── Custom brand icons (removed from lucide-react v1) ─────── */
-
 function GithubIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -40,8 +38,6 @@ function LinkedinIcon({ className }: { className?: string }) {
     </svg>
   );
 }
-
-/* ─────────────────────────── DATA ─────────────────────────── */
 
 const NAV_LINKS = [
   { label: "Sobre mí", href: "#about" },
@@ -120,15 +116,12 @@ const SOCIALS = [
   },
 ] as const;
 
-/* ─────────────────────────── COMPONENTS ─────────────────────────── */
-
 function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-100">
       <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-        {/* Logo */}
         <a
           href="#"
           className="text-lg font-semibold tracking-tight text-gray-900 transition-colors hover:text-blue-600"
@@ -136,7 +129,6 @@ function Navbar() {
           Andres Coseani
         </a>
 
-        {/* Desktop links */}
         <ul className="hidden items-center gap-8 md:flex">
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
@@ -150,7 +142,6 @@ function Navbar() {
           ))}
         </ul>
 
-        {/* Mobile toggle */}
         <button
           id="mobile-menu-toggle"
           onClick={() => setMobileOpen((v) => !v)}
@@ -165,7 +156,6 @@ function Navbar() {
         </button>
       </nav>
 
-      {/* Mobile drawer */}
       <div
         className={`overflow-hidden transition-all duration-300 md:hidden ${
           mobileOpen ? "max-h-60 border-b border-gray-100" : "max-h-0"
@@ -195,19 +185,17 @@ function HeroSection() {
       id="hero"
       className="relative flex min-h-screen flex-col items-center justify-center px-6 pt-20 text-center"
     >
-      {/* Subtle gradient background */}
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-blue-50/60 via-white to-white" />
+      <div className="glow-bg" />
 
       <div className="relative z-10 mx-auto max-w-2xl">
-        {/* Greeting badge — GREEN to signal availability */}
-        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-4 py-1.5 text-sm font-medium text-emerald-700">
+        <div className="mb-6 animate-float inline-flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50/50 backdrop-blur-sm px-4 py-1.5 text-sm font-medium text-emerald-700">
           <span className="inline-block h-2 w-2 animate-pulse rounded-full bg-emerald-500" />
           Disponible para nuevos proyectos
         </div>
 
         <h1 className="text-5xl font-bold tracking-tight text-gray-900 sm:text-6xl lg:text-7xl">
           Hola, soy{" "}
-          <span className="bg-gradient-to-r from-blue-600 to-blue-400 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-blue-600 via-blue-400 to-indigo-500 bg-clip-text text-transparent">
             Andres.
           </span>
         </h1>
@@ -221,32 +209,30 @@ function HeroSection() {
           Córdoba, Argentina
         </p>
 
-        {/* CTA scrolls to #about (Stack) so recruiters see tech first */}
-        <div className="flex justify-center gap-3">
-          <div className="mt-10 ">
+        <div className="flex justify-center gap-4">
+          <div className="mt-10">
             <a
               href="#about"
               id="cta-ver-stack"
-              className="group inline-flex items-center gap-2 rounded-full bg-blue-600 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-500/25 transition-all duration-300 hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-500/30 hover:-translate-y-0.5 active:translate-y-0"
+              className="group inline-flex items-center gap-2 rounded-full bg-blue-600 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-500/25 transition-all duration-300 hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-500/40 hover:-translate-y-1 active:translate-y-0"
             >
               Conocé mi stack
-              <ArrowDown className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5" />
+              <ArrowDown className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-1" />
             </a>
           </div>
           <div className="mt-10">
             <a
               href="#projects"
               id="cta-ver-proyectos"
-              className="group inline-flex items-center gap-2 rounded-full bg-blue-600 px-7 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-500/25 transition-all duration-300 hover:bg-blue-700 hover:shadow-xl hover:shadow-blue-500/30 hover:-translate-y-0.5 active:translate-y-0"
+              className="group inline-flex items-center gap-2 rounded-full bg-white border border-gray-200 px-7 py-3.5 text-sm font-semibold text-gray-700 shadow-sm transition-all duration-300 hover:bg-gray-50 hover:border-blue-200 hover:text-blue-600 hover:shadow-md hover:-translate-y-1 active:translate-y-0"
             >
               Proyectos destacados
-              <ArrowDown className="h-4 w-4 transition-transform duration-300 group-hover:translate-y-0.5" />
+              <ExternalLink className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
             </a>
           </div>
         </div>
       </div>
 
-      {/* Scroll indicator */}
       <div className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-gray-300">
         <ArrowDown className="h-5 w-5" />
       </div>
@@ -256,7 +242,7 @@ function HeroSection() {
 
 function Badge({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-flex items-center rounded-full border border-blue-100 bg-blue-50 px-3.5 py-1.5 text-sm font-medium text-blue-700 transition-all duration-200 hover:bg-blue-100 hover:border-blue-200 hover:scale-105 cursor-default">
+    <span className="inline-flex items-center rounded-full border border-blue-100 bg-blue-50/50 backdrop-blur-sm px-3.5 py-1.5 text-sm font-medium text-blue-700 transition-all duration-300 hover:bg-blue-100 hover:border-blue-200 hover:scale-110 cursor-default shadow-sm">
       {children}
     </span>
   );
@@ -264,7 +250,7 @@ function Badge({ children }: { children: React.ReactNode }) {
 
 function MiniBadge({ children }: { children: React.ReactNode }) {
   return (
-    <span className="inline-flex items-center rounded-full border border-gray-200 bg-gray-50 px-2.5 py-1 text-xs font-medium text-gray-600">
+    <span className="inline-flex items-center rounded-full border border-gray-100 bg-white/50 backdrop-blur-sm px-2.5 py-1 text-xs font-medium text-gray-600">
       {children}
     </span>
   );
@@ -279,9 +265,11 @@ const STACK_SECTIONS = [
 
 function AboutSection() {
   return (
-    <section id="about" className="scroll-mt-20 bg-gray-50 py-24">
+    <section id="about" className="scroll-mt-20 relative py-24 overflow-hidden">
+      <div className="absolute top-0 right-0 -z-10 h-[500px] w-[500px] rounded-full bg-blue-50/50 blur-3xl opacity-50 translate-x-1/2 -translate-y-1/2" />
+      <div className="absolute bottom-0 left-0 -z-10 h-[500px] w-[500px] rounded-full bg-indigo-50/50 blur-3xl opacity-50 -translate-x-1/2 translate-y-1/2" />
+
       <div className="mx-auto max-w-5xl px-6">
-        {/* Section header */}
         <div className="text-center">
           <p className="text-sm font-semibold uppercase tracking-widest text-blue-600">
             Sobre mí
@@ -296,12 +284,11 @@ function AboutSection() {
           </p>
         </div>
 
-        {/* Stack badges — 4 columns grid */}
         <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {STACK_SECTIONS.map(({ key, label }) => (
             <div
               key={key}
-              className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:shadow-md"
+              className="glass-card rounded-2xl p-6 transition-all duration-300 hover:shadow-xl hover:scale-[1.02]"
             >
               <h3 className="mb-4 text-xs font-semibold uppercase tracking-wider text-gray-400">
                 {label}
@@ -323,18 +310,18 @@ function ProjectCard({ project }: { project: Project }) {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <div className="group flex flex-col rounded-2xl border border-gray-200 bg-white shadow-sm transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
-      {/* Always visible */}
+    <div className="group glass-card flex flex-col rounded-2xl transition-all duration-500 hover:shadow-2xl hover:shadow-blue-500/10 hover:-translate-y-2">
       <div className="p-8 pb-0">
-        {/* Icon */}
-        <div className="mb-5 inline-flex h-11 w-11 items-center justify-center rounded-xl bg-blue-50 text-blue-600 transition-colors duration-300 group-hover:bg-blue-600 group-hover:text-white">
+        <div className="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-blue-600 transition-all duration-300 group-hover:bg-blue-600 group-hover:text-white group-hover:rotate-6 group-hover:scale-110 shadow-sm">
           {project.icon}
         </div>
 
-        <h3 className="text-xl font-semibold text-gray-900">{project.title}</h3>
+        <h3 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
+          {project.title}
+        </h3>
         <div className="min-h-[48px]">
           {project.subtitle && (
-            <p className="mt-0.5 text-sm font-medium text-gray-400">
+            <p className="mt-1 text-sm font-semibold text-gray-400">
               {project.subtitle}
             </p>
           )}
@@ -346,41 +333,39 @@ function ProjectCard({ project }: { project: Project }) {
         </div>
       </div>
 
-      {/* Expand / collapse toggle */}
       <button
         onClick={() => setExpanded(!expanded)}
-        className="mx-8 mt-4 inline-flex items-center gap-1 self-start text-sm font-medium text-blue-600 transition-colors duration-200 hover:text-blue-700"
+        className="mx-8 mt-4 inline-flex items-center gap-1.5 self-start text-sm font-bold text-blue-600 transition-all duration-200 hover:gap-2"
       >
-        {expanded ? "Ver menos" : "Ver más"}
+        {expanded ? "Ver menos" : "Ver más detalles"}
         <ChevronDown
-          className={`h-4 w-4 transition-transform duration-300 ${
+          className={`h-4 w-4 transition-transform duration-500 ${
             expanded ? "rotate-180" : ""
           }`}
         />
       </button>
 
-      {/* Expandable details */}
       <div
-        className={`overflow-hidden transition-all duration-300 ease-in-out ${
-          expanded ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        className={`overflow-hidden transition-all duration-500 ease-in-out ${
+          expanded ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <div className="px-8 pt-4 pb-2">
-          <p className="text-sm leading-relaxed text-gray-600">
-            {project.expandedDescription}
-          </p>
+          <div className="rounded-xl bg-gray-50/50 p-4 border border-gray-100">
+            <p className="text-sm leading-relaxed text-gray-600">
+              {project.expandedDescription}
+            </p>
+          </div>
 
-          {/* Status badge (e.g. Beta) */}
           {project.statusBadge && (
-            <div className="mt-3 inline-flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50 px-3 py-1 text-xs font-semibold text-amber-700">
-              <span className="inline-block h-1.5 w-1.5 rounded-full bg-amber-500" />
+            <div className="mt-4 inline-flex items-center gap-1.5 rounded-full border border-amber-200 bg-amber-50/50 backdrop-blur-sm px-3 py-1 text-xs font-bold text-amber-700">
+              <span className="inline-block h-1.5 w-1.5 rounded-full bg-amber-500 animate-pulse" />
               {project.statusBadge}
             </div>
           )}
 
-          {/* Tech stack mini-badges */}
-          <div className="mt-4">
-            <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-gray-400">
+          <div className="mt-5">
+            <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.1em] text-gray-400">
               Tecnologías usadas
             </p>
             <div className="flex flex-wrap gap-1.5">
@@ -392,32 +377,34 @@ function ProjectCard({ project }: { project: Project }) {
         </div>
       </div>
 
-      {/* Footer — link or "Próximamente" */}
-      <div className="mt-auto border-t border-gray-100 px-8 py-4">
+      <div className="mt-auto px-8 py-6">
         {project.comingSoon ? (
-          <span className="inline-flex items-center gap-1.5 text-sm font-medium text-gray-400 cursor-default">
-            🚧 Próximamente
-          </span>
+          <div className="flex items-center gap-2 py-2 px-4 rounded-xl bg-gray-50 border border-gray-100 w-fit">
+            <span className="text-lg">🚧</span>
+            <span className="text-sm font-bold text-gray-400">
+              Próximamente
+            </span>
+          </div>
         ) : (
           <a
             href={project.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-blue-600 transition-colors duration-200 hover:text-blue-700"
+            className="group/btn relative inline-flex items-center gap-2 overflow-hidden rounded-xl bg-gray-900 px-6 py-3 text-sm font-bold text-white transition-all duration-300 hover:bg-blue-600 hover:shadow-lg hover:shadow-blue-500/30"
           >
-            {project.linkLabel}
-            <ExternalLink className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+            <span className="relative z-10">{project.linkLabel}</span>
+            <ExternalLink className="relative z-10 h-4 w-4 transition-transform duration-300 group-hover/btn:translate-x-1 group-hover/btn:-translate-y-1" />
           </a>
         )}
       </div>
     </div>
   );
 }
+
 function ProjectsSection() {
   return (
-    <section id="projects" className="scroll-mt-20 py-24">
+    <section id="projects" className="scroll-mt-20 py-24 relative">
       <div className="mx-auto max-w-4xl px-6">
-        {/* Section header */}
         <div className="text-center">
           <p className="text-sm font-semibold uppercase tracking-widest text-blue-600">
             Portfolio
@@ -431,8 +418,7 @@ function ProjectsSection() {
           </p>
         </div>
 
-        {/* Project cards grid */}
-        <div className="mt-14 grid gap-8 items-start sm:grid-cols-2">
+        <div className="mt-16 grid gap-10 items-start sm:grid-cols-2">
           {PROJECTS.map((project) => (
             <ProjectCard key={project.title} project={project} />
           ))}
@@ -446,22 +432,22 @@ function ContactSection() {
   return (
     <footer
       id="contact"
-      className="scroll-mt-20 border-t border-gray-100 bg-gray-50 py-20"
+      className="scroll-mt-20 border-t border-gray-100 relative py-24 overflow-hidden"
     >
+      <div className="absolute inset-0 -z-10 bg-[radial-gradient(45%_40%_at_50%_50%,rgba(37,99,235,0.03)_0%,transparent_100%)]" />
+
       <div className="mx-auto max-w-4xl px-6 text-center">
         <p className="text-sm font-semibold uppercase tracking-widest text-blue-600">
           Contacto
         </p>
         <h2 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
-          Open to Work
+          ¿Hablamos de tu próximo proyecto?
         </h2>
         <p className="mx-auto mt-4 max-w-md text-lg text-gray-500">
-          Estoy abierto a nuevas oportunidades y colaboraciones. No dudes en
-          contactarme.
+          Estoy disponible para nuevas oportunidades y colaboraciones.
         </p>
 
-        {/* Social icons */}
-        <div className="mt-10 flex items-center justify-center gap-4">
+        <div className="mt-12 flex items-center justify-center gap-6">
           {SOCIALS.map((social) => (
             <a
               key={social.label}
@@ -470,34 +456,108 @@ function ContactSection() {
               rel="noopener noreferrer"
               id={`social-${social.label.toLowerCase()}`}
               aria-label={social.label}
-              className="inline-flex h-12 w-12 items-center justify-center rounded-full border border-gray-200 bg-white text-gray-500 shadow-sm transition-all duration-300 hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600 hover:shadow-md hover:-translate-y-0.5"
+              className="group relative inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-white border border-gray-200 text-gray-500 shadow-sm transition-all duration-300 hover:border-blue-500 hover:text-blue-600 hover:shadow-xl hover:shadow-blue-500/10 hover:-translate-y-1"
             >
-              {social.icon}
+              <div className="absolute inset-0 rounded-2xl bg-blue-50 opacity-0 transition-opacity group-hover:opacity-100" />
+              <span className="relative z-10">{social.icon}</span>
             </a>
           ))}
         </div>
 
-        {/* Copyright */}
-        <p className="mt-14 text-sm text-gray-400">
-          © {new Date().getFullYear()} Andres Coseani.
-        </p>
+        <div className="mt-20 pt-8 border-t border-gray-100">
+          <p className="text-sm font-medium text-gray-400">
+            © {new Date().getFullYear()} Andres Coseani.
+          </p>
+        </div>
       </div>
     </footer>
   );
 }
 
-/* ─────────────────────────── PAGE ─────────────────────────── */
+function FlowingLines() {
+  return (
+    <div className="fixed inset-0 pointer-events-none z-[-1] overflow-hidden opacity-40">
+      <svg
+        className="w-full h-full"
+        viewBox="0 0 1440 900"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M-100 200C200 100 400 500 700 400C1000 300 1200 700 1500 600"
+          stroke="url(#paint0_linear)"
+          strokeWidth="1.5"
+          className="animate-flow"
+        />
+        <path
+          d="M-100 400C300 300 500 700 800 600C1100 500 1300 900 1600 800"
+          stroke="url(#paint1_linear)"
+          strokeWidth="1"
+          className="animate-flow"
+          style={{ animationDelay: "-5s" }}
+        />
+        <path
+          d="M1540 100C1240 200 1040 -200 740 -100C440 0 240 400 -60 300"
+          stroke="url(#paint2_linear)"
+          strokeWidth="1.5"
+          className="animate-flow"
+          style={{ animationDelay: "-12s" }}
+        />
+        <defs>
+          <linearGradient
+            id="paint0_linear"
+            x1="0"
+            y1="0"
+            x2="1440"
+            y2="900"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop stopColor="#3B82F6" stopOpacity="0" />
+            <stop offset="0.5" stopColor="#3B82F6" stopOpacity="0.4" />
+            <stop offset="1" stopColor="#3B82F6" stopOpacity="0" />
+          </linearGradient>
+          <linearGradient
+            id="paint1_linear"
+            x1="0"
+            y1="0"
+            x2="1440"
+            y2="900"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop stopColor="#94A3B8" stopOpacity="0" />
+            <stop offset="0.5" stopColor="#94A3B8" stopOpacity="0.3" />
+            <stop offset="1" stopColor="#94A3B8" stopOpacity="0" />
+          </linearGradient>
+          <linearGradient
+            id="paint2_linear"
+            x1="0"
+            y1="0"
+            x2="1440"
+            y2="900"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop stopColor="#60A5FA" stopOpacity="0" />
+            <stop offset="0.5" stopColor="#60A5FA" stopOpacity="0.2" />
+            <stop offset="1" stopColor="#60A5FA" stopOpacity="0" />
+          </linearGradient>
+        </defs>
+      </svg>
+    </div>
+  );
+}
 
 export default function Home() {
   return (
-    <>
+    <div className="relative min-h-screen bg-white selection:bg-blue-100 selection:text-blue-900">
+      <div className="grid-bg" />
+      <FlowingLines />
       <Navbar />
-      <main className="flex-1">
+      <main className="relative z-10 flex flex-col">
         <HeroSection />
         <AboutSection />
         <ProjectsSection />
       </main>
       <ContactSection />
-    </>
+    </div>
   );
 }
