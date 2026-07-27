@@ -52,7 +52,7 @@ const STACK = {
   databases: ["Firebase", "PostgreSQL", "Supabase", "MongoDB"],
   tools: ["Git", "GitHub", "Jira", "Scrum / Agile"],
 } as const;
-
+const LEARNING_STACK = ["C# / .NET", "Angular", "SQL Server"] as const;
 type Project = {
   id: string;
   title: string;
@@ -143,7 +143,13 @@ const SOCIALS = [
     icon: <Mail className="h-5 w-5" />,
   },
 ] as const;
-
+function LearningBadge({ children }: { children: React.ReactNode }) {
+  return (
+    <span className="inline-flex items-center rounded-full border border-dashed border-emerald-300 bg-white px-3.5 py-1.5 text-sm font-medium text-emerald-700 transition-all duration-300 hover:bg-emerald-50 hover:scale-110 cursor-default">
+      {children}
+    </span>
+  );
+}
 function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
   return (
@@ -398,12 +404,20 @@ function HeroVisual() {
           <div className="pl-4 text-gray-300">Analista en Sistemas</div>
           <div className="mt-3">
             <span className="text-emerald-500">▸</span>{" "}
+            <span className="text-gray-400">learning</span>
+          </div>
+          <div className="pl-4 text-gray-300">
+            C# / .NET <span className="text-emerald-600">·</span> Angular
+          </div>
+          <div className="mt-3">
+            <span className="text-emerald-500">▸</span>{" "}
             <span className="text-gray-400">status</span>
           </div>
           <div className="pl-4 flex items-center gap-2">
             <span className="inline-block h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
             <span className="text-emerald-400">open to work</span>
           </div>
+
           <div className="mt-2 text-gray-600 text-xs">
             █<span className="animate-pulse">_</span>
           </div>
@@ -437,9 +451,8 @@ function HeroSection() {
             </p>
 
             <p className="mt-8 text-base text-gray-500 leading-relaxed max-w-md">
-              Experiencia en el ciclo completo del software — desde el análisis
-              y la arquitectura hasta el despliegue en producción. Construyo
-              sistemas escalables y mantenibles con tecnologías modernas.
+              Convierto problemas de negocio en software que la gente realmente
+              usa.
             </p>
 
             <div className="mt-10 flex flex-wrap gap-4">
@@ -461,7 +474,10 @@ function HeroSection() {
           </div>
 
           {/* RIGHT — visual con partículas y terminal */}
-          <div className="hidden lg:block h-[500px] animate-float" style={{ animationDelay: '1s' }}>
+          <div
+            className="hidden lg:block h-[500px] animate-float"
+            style={{ animationDelay: "1s" }}
+          >
             <HeroVisual />
           </div>
         </div>
@@ -489,7 +505,7 @@ function MiniBadge({ children }: { children: React.ReactNode }) {
     </span>
   );
 }
-
+const STATS = [{ value: "~1 año", label: "Experiencia full stack" }] as const;
 const STACK_SECTIONS = [
   { key: "frontend" as const, label: "Frontend" },
   { key: "backend" as const, label: "Backend" },
@@ -508,12 +524,28 @@ function AboutSection() {
             Sobre mí
           </p>
           <p className="mx-auto mt-4 max-w-2xl text-lg leading-relaxed text-gray-600">
-            Experiencia práctica en el ciclo de vida completo del software,
-            desde la definición de arquitectura y bases de datos hasta el
-            despliegue en producción. Enfoque en construir sistemas mantenibles
-            y robustos, priorizando la resolución eficiente de problemas
-            técnicos y de negocio.
+            Me gustan los sistemas pero que más me atrapó del desarrollo web es
+            otra cosa: construir algo que lo puede usar cualquier persona, desde
+            cualquier parte del mundo, conectada a través de una pantalla. Me
+            gusta entender el negocio de cada cliente antes de tocar código —
+            pensar en como se va a usar el sistema una vez desplegado. Soy
+            autónomo y curioso: si no sé algo, lo investigo hasta entenderlo.
           </p>
+          <div className="mx-auto mt-12 grid max-w-2xl grid-cols-1 gap-4 ">
+            {STATS.map((stat) => (
+              <div
+                key={stat.label}
+                className="glass-card rounded-2xl px-4 py-6 transition-all duration-300 hover:shadow-lg hover:scale-[1.03]"
+              >
+                <p className="text-3xl font-extrabold text-emerald-700">
+                  {stat.value}
+                </p>
+                <p className="mt-1 text-xs font-medium text-gray-500">
+                  {stat.label}
+                </p>
+              </div>
+            ))}
+          </div>
           <h2 className="mt-20 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
             Stack Tecnológico
           </h2>
@@ -534,6 +566,17 @@ function AboutSection() {
               </div>
             </div>
           ))}
+        </div>
+        <div className="flex mt-6 rounded-2xl border border-dashed border-emerald-300 bg-emerald-20/10 p-6 justify-between">
+          <h3 className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-black">
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            En formación — sumando esto activamente
+          </h3>
+          <div className="flex flex-wrap gap-2">
+            {LEARNING_STACK.map((tech) => (
+              <LearningBadge key={tech}>{tech}</LearningBadge>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -682,9 +725,9 @@ function ContactSection() {
           Open to Work
         </h2>
         <p className="mx-auto mt-4 max-w-2xl text-lg text-gray-500">
-          Estoy disponible y buscando sumarme a un equipo de desarrollo. Si
-          estás buscando incorporar un perfil Full Stack, mi bandeja de entrada
-          está abierta.
+          Estoy disponible y buscando sumarme a un equipo de desarrollo. Cuento
+          con un perfil adecuado para incorporarme como Full Stack, mi bandeja
+          de entrada está abierta.
         </p>
         <div className="mt-8 flex justify-center">
           <a
